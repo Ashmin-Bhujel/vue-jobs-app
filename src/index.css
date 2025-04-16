@@ -5,3 +5,7 @@
 @theme {
   --font-sans: "Inter", "sans-serif";
 }
+
+:root {
+  --ui-radius: 0rem;
+}
