@@ -3,5 +3,6 @@
     <Navbar />
     <Hero />
     <HomeCards />
+    <JobListings />
   </UApp>
 </template>

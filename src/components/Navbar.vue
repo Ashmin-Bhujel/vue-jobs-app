@@ -11,11 +11,11 @@ const items = ref<NavigationMenuItem[]>([
     },
     {
       label: "Jobs",
-      to: "/jobs",
+      to: "/job",
     },
     {
       label: "Add Job",
-      to: "/jobs/add",
+      to: "/job/add",
     },
   ],
 ]);
