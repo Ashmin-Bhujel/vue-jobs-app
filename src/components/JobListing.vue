@@ -1,13 +1,27 @@
 <script lang="ts" setup>
 import type { JobType } from "@/types";
+import { computed, ref } from "vue";
 
-defineProps<{
+const props = defineProps<{
   job: JobType;
 }>();
+
+const showFullDescription = ref(false);
+const truncatedDescription = computed(() => {
+  let description = props.job.description;
+  if (!showFullDescription.value && description.length > 90) {
+    description = description.slice(0, 100) + "...";
+  }
+  return description;
+});
+
+function toggleShowDescription() {
+  showFullDescription.value = !showFullDescription.value;
+}
 </script>
 
 <template>
-  <UCard variant="subtle">
+  <UCard variant="subtle" class="shadow-md">
     <template #header>
       <div class="mb-6">
         <div class="my-2 text-neutral-500">{{ job.type }}</div>
@@ -17,7 +31,13 @@ defineProps<{
 
     <div class="job-listing-body">
       <div class="mb-5">
-        {{ job.description }}
+        <p>{{ truncatedDescription }}</p>
+        <UButton
+          variant="link"
+          @click="toggleShowDescription"
+          :label="showFullDescription ? 'Show less' : 'Show more'"
+          class="cursor-pointer px-0"
+        />
       </div>
       <h3 class="text-primary-500 mb-2">{{ job.salary }} / Year</h3>
     </div>

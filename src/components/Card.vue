@@ -27,6 +27,7 @@ withDefaults(
     :ui="{
       root: bgColor,
     }"
+    class="shadow-md"
   >
     <template #header>
       <h2 class="text-2xl font-bold">{{ title }}</h2>

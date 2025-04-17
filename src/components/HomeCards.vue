@@ -4,14 +4,14 @@
       <Card
         title="For Developers"
         content="Browse our Vue jobs and start your career today"
-        url="/job"
+        url="/jobs"
         call-to-action="Browse Jobs"
         bg-call-to-action="neutral"
       />
       <Card
         title="For Employers"
         content="List your job to find the perfect developer for the role"
-        url="/job/add"
+        url="/jobs/add"
         call-to-action="Add Job"
         bg-color="bg-primary-100 dark:bg-primary-900"
       />

@@ -3,6 +3,6 @@
     <Navbar />
     <Hero />
     <HomeCards />
-    <JobListings />
+    <JobListings :limit="3" :show-button="true" />
   </UApp>
 </template>

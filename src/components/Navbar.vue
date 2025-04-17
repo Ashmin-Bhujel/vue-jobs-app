@@ -11,11 +11,11 @@ const items = ref<NavigationMenuItem[]>([
     },
     {
       label: "Jobs",
-      to: "/job",
+      to: "/jobs",
     },
     {
       label: "Add Job",
-      to: "/job/add",
+      to: "/jobs/add",
     },
   ],
 ]);
@@ -27,7 +27,7 @@ const items = ref<NavigationMenuItem[]>([
       <img :src="logo" alt="" class="h-10" />
     </a>
     <UNavigationMenu
-      highlight
+      :highlight="true"
       highlight-color="primary"
       orientation="horizontal"
       :items="items"
