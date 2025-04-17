@@ -1,4 +1,4 @@
-<script setup>
+<script lang="ts" setup>
 import { useColorMode } from "@vueuse/core";
 
 const mode = useColorMode();
@@ -10,5 +10,6 @@ const mode = useColorMode();
     color="neutral"
     variant="ghost"
     @click="mode = mode === 'dark' ? 'light' : 'dark'"
+    class="cursor-pointer"
   />
 </template>
