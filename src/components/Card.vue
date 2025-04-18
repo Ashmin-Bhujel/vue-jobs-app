@@ -7,7 +7,6 @@ withDefaults(
     content: string;
     url: string;
     callToAction: string;
-    bgColor?: string;
     bgCallToAction?: ColorType;
   }>(),
   {
@@ -15,7 +14,6 @@ withDefaults(
     content: "Card Content",
     url: "/",
     callToAction: "Call to Action",
-    bgColor: "",
     bgCallToAction: "primary",
   },
 );
@@ -25,7 +23,7 @@ withDefaults(
   <UCard
     variant="subtle"
     :ui="{
-      root: `${bgColor} shadow-md`,
+      root: 'shadow-md',
     }"
   >
     <template #header>

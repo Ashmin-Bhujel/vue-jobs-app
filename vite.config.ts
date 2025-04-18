@@ -9,7 +9,8 @@ import nuxtUIConf from "./nuxtUIConf";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueDevTools(), tailwindcss(), ui(nuxtUIConf)],
+  // plugins: [vue(), vueDevTools(), tailwindcss(), ui(nuxtUIConf)],
+  plugins: [vue(), tailwindcss(), ui(nuxtUIConf)],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

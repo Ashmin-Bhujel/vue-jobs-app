@@ -13,7 +13,7 @@
         content="List your job to find the perfect developer for the role"
         url="/jobs/add"
         call-to-action="Add Job"
-        bg-color="bg-primary-100 dark:bg-primary-900"
+        bg-call-to-action="neutral"
       />
     </div>
   </UContainer>

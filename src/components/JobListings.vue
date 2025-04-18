@@ -1,9 +1,6 @@
 <script lang="ts" setup>
-import jobsData from "@/jobs.json";
 import type { JobType } from "@/types";
-import { ref } from "vue";
-
-const jobs = ref<JobType[]>(jobsData);
+import { onMounted, reactive, ref } from "vue";
 
 withDefaults(
   defineProps<{
@@ -14,26 +11,55 @@ withDefaults(
     showButton: false,
   },
 );
+
+const state: { jobs: JobType[]; isLoading: boolean } = reactive({
+  jobs: [],
+  isLoading: true,
+});
+
+onMounted(async () => {
+  try {
+    const response = await fetch("http://localhost:5000/jobs", {
+      method: "GET",
+    });
+    const data = await response.json();
+    state.jobs = data;
+  } catch (error) {
+    console.log("Error fetching jobs data!");
+  } finally {
+    state.isLoading = false;
+  }
+});
 </script>
 
 <template>
-  <section class="bg-info-50 dark:bg-info-950/10">
+  <!-- <section class="bg-info-50 dark:bg-info-950/10"> -->
+  <section>
     <UContainer class="py-10">
-      <h2 class="text-primary-500 mb-6 text-center text-3xl font-bold">
-        Browse Jobs
-      </h2>
+      <h2 class="mb-6 text-center text-3xl font-bold">Browse Jobs</h2>
+
+      <!-- Spinner -->
+      <div
+        v-if="state.isLoading"
+        class="flex items-center justify-center py-10"
+      >
+        <UIcon
+          name="svg-spinners:ring-resize"
+          class="text-6xl text-neutral-500"
+        />
+      </div>
 
       <!-- Jobs list -->
-      <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
+      <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <JobListing
-          v-for="job in jobs.slice(0, limit || jobs.length)"
+          v-for="job in state.jobs.slice(0, limit || state.jobs.length)"
           :key="job.id"
           :job
         />
       </div>
     </UContainer>
 
-    <UContainer class="max-w-lg pb-10" v-if="showButton">
+    <UContainer class="max-w-lg pb-10" v-if="showButton && !state.isLoading">
       <UButton
         to="/jobs"
         color="neutral"

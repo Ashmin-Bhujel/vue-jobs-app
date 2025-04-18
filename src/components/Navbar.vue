@@ -24,13 +24,14 @@ const items = ref<NavigationMenuItem[]>([
 <template>
   <UContainer class="flex items-center justify-between py-4">
     <RouterLink to="/">
-      <img :src="logo" alt="" class="h-10" />
+      <UIcon name="vscode-icons:file-type-vue" class="size-10" />
     </RouterLink>
     <UNavigationMenu
-      :highlight="true"
-      highlight-color="primary"
+      highlight
+      highlight-color="neutral"
       orientation="horizontal"
       :items="items"
+      color="neutral"
       :ui="{
         root: 'w-full justify-center max-md:hidden',
         list: 'gap-6',

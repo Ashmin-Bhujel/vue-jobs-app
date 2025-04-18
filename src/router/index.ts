@@ -1,5 +1,7 @@
 import Home from "@/views/Home.vue";
+import Job from "@/views/Job.vue";
 import Jobs from "@/views/Jobs.vue";
+import NotFound from "@/views/NotFound.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -14,6 +16,16 @@ const router = createRouter({
       path: "/jobs",
       name: "jobs",
       component: Jobs,
+    },
+    {
+      path: "/jobs/:id",
+      name: "job",
+      component: Job,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "not-found",
+      component: NotFound,
     },
   ],
 });
