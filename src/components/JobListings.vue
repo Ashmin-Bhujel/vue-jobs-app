@@ -38,7 +38,9 @@ withDefaults(
         to="/jobs"
         color="neutral"
         size="lg"
-        class="block px-6 py-4 text-center"
+        :ui="{
+          base: 'block px-6 py-4 text-center',
+        }"
         >View All Jobs</UButton
       >
     </UContainer>

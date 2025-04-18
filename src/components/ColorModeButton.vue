@@ -10,6 +10,8 @@ const mode = useColorMode();
     color="neutral"
     variant="ghost"
     @click="mode = mode === 'dark' ? 'light' : 'dark'"
-    class="cursor-pointer"
+    :ui="{
+      base: 'cursor-pointer',
+    }"
   />
 </template>

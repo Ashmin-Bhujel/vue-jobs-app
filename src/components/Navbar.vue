@@ -23,16 +23,16 @@ const items = ref<NavigationMenuItem[]>([
 
 <template>
   <UContainer class="flex items-center justify-between py-4">
-    <a href="/">
+    <RouterLink to="/">
       <img :src="logo" alt="" class="h-10" />
-    </a>
+    </RouterLink>
     <UNavigationMenu
       :highlight="true"
       highlight-color="primary"
       orientation="horizontal"
       :items="items"
-      class="w-full justify-center max-md:hidden"
       :ui="{
+        root: 'w-full justify-center max-md:hidden',
         list: 'gap-6',
       }"
     />

@@ -21,7 +21,12 @@ function toggleShowDescription() {
 </script>
 
 <template>
-  <UCard variant="subtle" class="shadow-md">
+  <UCard
+    variant="subtle"
+    :ui="{
+      root: 'shadow-md',
+    }"
+  >
     <template #header>
       <div class="mb-6">
         <div class="my-2 text-neutral-500">{{ job.type }}</div>
@@ -36,7 +41,9 @@ function toggleShowDescription() {
           variant="link"
           @click="toggleShowDescription"
           :label="showFullDescription ? 'Show less' : 'Show more'"
-          class="cursor-pointer px-0"
+          :ui="{
+            base: 'cursor-pointer px-0',
+          }"
         />
       </div>
       <h3 class="text-primary-500 mb-2">{{ job.salary }} / Year</h3>

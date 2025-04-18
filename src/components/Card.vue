@@ -25,9 +25,8 @@ withDefaults(
   <UCard
     variant="subtle"
     :ui="{
-      root: bgColor,
+      root: `${bgColor} shadow-md`,
     }"
-    class="shadow-md"
   >
     <template #header>
       <h2 class="text-2xl font-bold">{{ title }}</h2>
