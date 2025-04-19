@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import logo from "@/assets/images/logo.png";
 import type { NavigationMenuItem } from "@nuxt/ui";
 import { ref } from "vue";
 
@@ -24,7 +23,7 @@ const items = ref<NavigationMenuItem[]>([
 <template>
   <UContainer class="flex items-center justify-between py-4">
     <RouterLink to="/">
-      <UIcon name="vscode-icons:file-type-vue" class="size-10" />
+      <UIcon name="logos:vue" class="size-10" />
     </RouterLink>
     <UNavigationMenu
       highlight

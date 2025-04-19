@@ -12,14 +12,14 @@ withDefaults(
   },
 );
 
-const state: { jobs: JobType[]; isLoading: boolean } = reactive({
+const state = reactive<{ jobs: JobType[]; isLoading: boolean }>({
   jobs: [],
   isLoading: true,
 });
 
 onMounted(async () => {
   try {
-    const response = await fetch("http://localhost:5000/jobs", {
+    const response = await fetch("/api/jobs", {
       method: "GET",
     });
     const data = await response.json();

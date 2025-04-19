@@ -6,7 +6,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const jobId = route.params.id;
 
-const state: { job: JobType; isLoading: boolean } = reactive({
+const state = reactive<{ job: JobType; isLoading: boolean }>({
   job: {
     id: 0,
     title: "",
@@ -26,7 +26,7 @@ const state: { job: JobType; isLoading: boolean } = reactive({
 
 onMounted(async () => {
   try {
-    const response = await fetch(`http://localhost:5000/jobs/${jobId}`, {
+    const response = await fetch(`/api/jobs/${jobId}`, {
       method: "GET",
     });
     const data = await response.json();

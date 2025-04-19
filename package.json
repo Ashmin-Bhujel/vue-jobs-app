@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "start": "run-p dev server",
+    "start-preview": "run-p preview server",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
