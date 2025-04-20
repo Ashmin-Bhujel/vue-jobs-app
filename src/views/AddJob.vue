@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import router from "@/router";
 import type { JobFormType, JobType } from "@/types";
 import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
 
 const toast = useToast();
+const router = useRouter();
 
 const jobTypeList = ref([
   { label: "Full-Time", value: "Full-Time" },

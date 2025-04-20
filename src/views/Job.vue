@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import type { JobType } from "@/types";
 import { onMounted, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const route = useRoute();
+const router = useRouter();
+const toast = useToast();
 const jobId = route.params.id;
 
 const state = reactive<{ job: JobType; isLoading: boolean }>({
@@ -23,6 +25,26 @@ const state = reactive<{ job: JobType; isLoading: boolean }>({
   },
   isLoading: true,
 });
+
+async function deleteJob() {
+  try {
+    const confirm = window.confirm("Are you sure you want to delete this job?");
+    if (confirm) {
+      const response = await fetch(`/api/jobs/${jobId}`, { method: "DELETE" });
+      const data = await response.json();
+      if (response.ok) {
+        toast.add({
+          title: "Delete Job",
+          description: `The job "${data.title}" has been deleted`,
+          color: "primary",
+        });
+        router.push("/jobs");
+      }
+    }
+  } catch (error) {
+    console.error("Error deleting job:", error);
+  }
+}
 
 onMounted(async () => {
   try {
@@ -172,6 +194,7 @@ onMounted(async () => {
             <UButton
               size="lg"
               color="error"
+              @click="deleteJob"
               :ui="{
                 base: 'block w-full text-center mt-4 cursor-pointer',
               }"
