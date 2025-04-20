@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import router from "@/router";
 import type { JobFormType, JobType } from "@/types";
-import { reactive, ref } from "vue";
+import { reactive, ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 const toast = useToast();
+const route = useRoute();
+const jobID = route.params.id;
 
 const jobTypeList = ref([
   { label: "Full-Time", value: "Full-Time" },
@@ -41,9 +44,29 @@ const form = reactive<JobFormType>({
   },
 });
 
-async function addJob() {
-  const newJob: JobType = {
-    id: String(crypto.randomUUID()),
+const state = reactive<{
+  job: JobFormType;
+  isLoading: boolean;
+}>({
+  job: {
+    title: "",
+    type: jobTypeList.value[0].value,
+    description: "",
+    location: "",
+    salary: salaryList.value[0].value,
+    company: {
+      name: "",
+      description: "",
+      contactEmail: "",
+      contactPhone: "",
+    },
+  },
+  isLoading: true,
+});
+
+async function updateJob() {
+  const updatedJob: JobType = {
+    id: String(jobID),
     title: form.title,
     type: form.type,
     description: form.description,
@@ -58,31 +81,58 @@ async function addJob() {
   };
 
   try {
-    const response = await fetch("/api/jobs", {
-      method: "POST",
-      body: JSON.stringify(newJob),
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      const data = await response.json();
-      router.push(`/jobs/${data.id}`);
-      toast.add({
-        title: "Add Job",
-        description: "A new job was added successfully",
-        color: "primary",
+    const confirm = window.confirm("Are sure you want to update this job?");
+    if (confirm) {
+      const response = await fetch(`/api/jobs/${jobID}`, {
+        method: "PUT",
+        body: JSON.stringify(updatedJob),
+        headers: { "Content-Type": "application/json" },
       });
+      if (response.ok) {
+        const data = await response.json();
+        router.push(`/jobs/${data.id}`);
+        toast.add({
+          title: "Update Job",
+          description: "The job was updatedJob successfully",
+          color: "primary",
+        });
+      }
     }
   } catch (error) {
     console.error("Error adding job:", error);
   }
 }
+
+onMounted(async () => {
+  try {
+    const response = await fetch(`/api/jobs/${jobID}`, { method: "GET" });
+    const data = await response.json();
+
+    // Putting existing data into form
+    if (response.ok) {
+      state.job = data;
+      Object.assign(form, {
+        type: state.job.type,
+        title: state.job.title,
+        salary: state.job.salary,
+        location: state.job.location,
+        description: state.job.description,
+        company: { ...state.job.company },
+      });
+    }
+  } catch (error) {
+    console.error("Error loading job:", error);
+  } finally {
+    state.isLoading = false;
+  }
+});
 </script>
 
 <template>
   <UContainer class="max-w-2xl py-20">
     <UCard variant="subtle" class="px-2 py-8 shadow-md">
-      <form @submit.prevent="addJob">
-        <h2 class="mb-6 text-center text-4xl font-semibold">Add Job</h2>
+      <form @submit.prevent="updateJob">
+        <h2 class="mb-6 text-center text-4xl font-semibold">Edit Job</h2>
 
         <div class="mb-4">
           <UFormField label="Job Type" required>
@@ -234,7 +284,7 @@ async function addJob() {
             :ui="{
               base: 'block text-center w-full',
             }"
-            >Add Job</UButton
+            >Update Job</UButton
           >
         </div>
       </form>

@@ -183,7 +183,7 @@ onMounted(async () => {
           >
             <h3 class="mb-6 text-xl font-bold">Manage Job</h3>
             <UButton
-              :to="`/jobs/${state.job.id}/edit`"
+              :to="`/jobs/edit/${state.job.id}`"
               size="lg"
               color="neutral"
               :ui="{
