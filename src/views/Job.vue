@@ -30,7 +30,7 @@ async function deleteJob() {
   try {
     const confirm = window.confirm("Are you sure you want to delete this job?");
     if (confirm) {
-      const response = await fetch(`/api/jobs/${jobId}`, { method: "DELETE" });
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${jobId}`, { method: "DELETE" });
       const data = await response.json();
       if (response.ok) {
         toast.add({
@@ -48,7 +48,7 @@ async function deleteJob() {
 
 onMounted(async () => {
   try {
-    const response = await fetch(`/api/jobs/${jobId}`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${jobId}`, {
       method: "GET",
     });
     const data = await response.json();

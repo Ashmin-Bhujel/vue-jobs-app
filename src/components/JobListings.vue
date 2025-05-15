@@ -19,7 +19,7 @@ const state = reactive<{ jobs: JobType[]; isLoading: boolean }>({
 
 onMounted(async () => {
   try {
-    const response = await fetch("/api/jobs", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs`, {
       method: "GET",
     });
     const data = await response.json();

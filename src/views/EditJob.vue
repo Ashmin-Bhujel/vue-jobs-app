@@ -83,7 +83,7 @@ async function updateJob() {
   try {
     const confirm = window.confirm("Are sure you want to update this job?");
     if (confirm) {
-      const response = await fetch(`/api/jobs/${jobID}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${jobID}`, {
         method: "PUT",
         body: JSON.stringify(updatedJob),
         headers: { "Content-Type": "application/json" },
@@ -105,7 +105,7 @@ async function updateJob() {
 
 onMounted(async () => {
   try {
-    const response = await fetch(`/api/jobs/${jobID}`, { method: "GET" });
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs/${jobID}`, { method: "GET" });
     const data = await response.json();
 
     // Putting existing data into form

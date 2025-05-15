@@ -58,7 +58,7 @@ async function addJob() {
   };
 
   try {
-    const response = await fetch("/api/jobs", {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/jobs`, {
       method: "POST",
       body: JSON.stringify(newJob),
       headers: { "Content-Type": "application/json" },
