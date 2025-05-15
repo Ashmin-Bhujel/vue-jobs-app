@@ -2,6 +2,10 @@
 
 A simple jobs posting app built using Vue.js (Front-End) and JSON server (Back-end).
 
+[**Live Preview**](https://vue-jobs-app-frontend.onrender.com) of the project.
+
+**NOTE:** The backend may be on sleep so, it may take some time while loading data for first time *(approximately 30 - 40s for startup)*.
+
 ## Technologies Used
 
 - [x] Vue.js

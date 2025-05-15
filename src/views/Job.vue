@@ -146,7 +146,7 @@ onMounted(async () => {
               >
                 Company Info
               </h3>
-              <h2 class="text-2xl">NewTek Solutions</h2>
+              <h2 class="text-2xl">{{ state.job.company.name }}</h2>
             </template>
 
             <p>
